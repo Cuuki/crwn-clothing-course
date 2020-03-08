@@ -1,0 +1,17 @@
+.App {
+  padding: 20px 80px;
+  font-family: system-ui;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+
+  &:hover {
+    color: #000;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}

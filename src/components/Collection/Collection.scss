@@ -1,0 +1,21 @@
+.collection {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+
+  .title {
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  .preview {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .load-more {
+    margin: 18px auto 0;
+  }
+}
