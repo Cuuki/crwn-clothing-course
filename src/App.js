@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {selectCurrentUser} from './selectors/userSelectors';
+import {checkUserSession} from './actions/userActions';
 
 import {Switch, Route, Redirect} from 'react-router-dom';
 import Header from './components/Header';
@@ -15,27 +16,9 @@ import 'normalize.css';
 import './App.scss';
 
 class App extends React.Component {
-  unsubscribeFromAuth = null;
-
   componentDidMount() {
-    // const {setCurrentUser} = this.props;
-    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth);
-    //     userRef.onSnapshot(snapShot => {
-    //       setCurrentUser({
-    //         id: snapShot.id,
-    //         ...snapShot.data(),
-    //       });
-    //     });
-    //   } else {
-    //     setCurrentUser(null);
-    //   }
-    // });
-  }
-
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
+    const {checkUserSession} = this.props;
+    checkUserSession();
   }
 
   render() {
@@ -63,4 +46,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

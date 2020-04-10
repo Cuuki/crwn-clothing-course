@@ -2,18 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-const config = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
-};
-
-export const getCollectionReference = collectionName => {
+export const getCollectionReference = (collectionName) => {
   return firestore.collection(collectionName);
 };
 
@@ -21,11 +10,11 @@ export const getDocumentReference = (collectionName, documentId) => {
   return firestore.doc(`${collectionName}/${documentId}`);
 };
 
-export const getCollectionSnapshot = async collectionRef => {
+export const getCollectionSnapshot = async (collectionRef) => {
   return await collectionRef.get();
 };
 
-export const getDocumentSnapshot = async documentRef => {
+export const getDocumentSnapshot = async (documentRef) => {
   const snapshot = await documentRef.get();
 
   if (!snapshot.exists) {
@@ -35,12 +24,12 @@ export const getDocumentSnapshot = async documentRef => {
   return snapshot;
 };
 
-export const getDocumentData = documentSnap => {
+export const getDocumentData = (documentSnap) => {
   return documentSnap.data();
 };
 
 export const getCollectionData = (collectionSnap, callback) => {
-  return collectionSnap.docs.map(doc => callback(doc, getDocumentData(doc)));
+  return collectionSnap.docs.map((doc) => callback(doc, getDocumentData(doc)));
 };
 
 export const createDocumentsForCollection = async (collectionName, data) => {
@@ -48,7 +37,7 @@ export const createDocumentsForCollection = async (collectionName, data) => {
 
   const batch = firestore.batch();
 
-  data.forEach(obj => {
+  data.forEach((obj) => {
     const newDocumentRef = collectionRef.doc();
     batch.set(newDocumentRef, obj);
   });
@@ -81,7 +70,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-export const convertCollectionsSnapshotToMap = collectionsSnap => {
+export const convertCollectionsSnapshotToMap = (collectionsSnap) => {
   const collectionData = getCollectionData(collectionsSnap, (doc, data) => {
     const {title, items} = data;
 
@@ -101,10 +90,30 @@ export const convertCollectionsSnapshotToMap = collectionsSnap => {
   }, {});
 };
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
+const config = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+};
+
 firebase.initializeApp(config);
 
-export const firestore = firebase.firestore();
 export const auth = firebase.auth();
+export const firestore = firebase.firestore();
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({prompt: 'select_account'});
