@@ -1,4 +1,4 @@
-import {takeLatest, call, put} from 'redux-saga/effects';
+import {takeLatest, all, call, put} from 'redux-saga/effects';
 import {
   getCollectionReference,
   convertCollectionsSnapshotToMap,
@@ -26,4 +26,8 @@ export function* fetchCollections() {
 
 export function* watchFetchCollectionsStart() {
   yield takeLatest(FETCH_COLLECTIONS_START, fetchCollections);
+}
+
+export default function* shopSagas() {
+  yield all([call(watchFetchCollectionsStart)]);
 }

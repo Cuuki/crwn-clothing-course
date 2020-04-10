@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {auth, signInWithGoogle} from '../../utils/firebase';
+import {connect} from 'react-redux';
+import {
+  googleSignInStart,
+  credentialSignInStart,
+} from '../../actions/userActions';
 
 import Button from '../UI/Button';
 import FormInput from '../UI/FormInput';
@@ -17,24 +21,16 @@ class Login extends React.Component {
     };
   }
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
+    const {credentialSignInStart} = this.props;
+    const {email, password} = this.state;
+
     event.preventDefault();
 
-    const {email, password} = this.state;
-    //TODO: login works even if user doesn't exist
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-
-      this.setState({
-        email: '',
-        password: '',
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    credentialSignInStart(email, password);
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const {value, name} = event.target;
 
     this.setState({
@@ -43,6 +39,8 @@ class Login extends React.Component {
   };
 
   render() {
+    const {googleSignInStart} = this.props;
+
     return (
       <div className="login">
         <h2 className="title">I already have an account</h2>
@@ -68,7 +66,7 @@ class Login extends React.Component {
           />
           <div className="buttons">
             <Button type="submit">Login</Button>
-            <Button onClick={signInWithGoogle} isGoogleSignIn>
+            <Button type="button" onClick={googleSignInStart} isGoogleSignIn>
               Login with Google
             </Button>
           </div>
@@ -78,4 +76,10 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  googleSignInStart: () => dispatch(googleSignInStart()),
+  credentialSignInStart: (email, password) =>
+    dispatch(credentialSignInStart({email, password})),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
