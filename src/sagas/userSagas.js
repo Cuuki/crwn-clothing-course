@@ -12,15 +12,18 @@ import {
   CHECK_USER_SESSION,
   SIGN_OUT_START,
   REGISTRATION_START,
+  REGISTRATION_SUCCESS,
 } from '../constants/userActionTypes';
 import {
   signInSuccess,
   signInFailure,
   signOutSuccess,
   signOutFailure,
+  registrationSuccess,
+  registrationFailure,
 } from '../actions/userActions';
 
-export function* getSnapshotFromUserAuth(userAuth, data = {}) {
+export function* getSnapshotFromUserAuth(userAuth, data) {
   try {
     const userRef = yield call(createUserProfileDocument, userAuth, data);
     const userSnapshot = yield userRef.get();
@@ -78,7 +81,22 @@ export function* createNewUser(action) {
 
   try {
     const {user} = yield auth.createUserWithEmailAndPassword(email, password);
-    yield getSnapshotFromUserAuth(user, displayName);
+    yield put(
+      registrationSuccess({
+        user,
+        additionalData: {displayName},
+      })
+    );
+  } catch (error) {
+    yield put(registrationFailure(error.message));
+  }
+}
+
+export function* signInNewUser(action) {
+  const {user, additionalData} = action.payload;
+
+  try {
+    yield getSnapshotFromUserAuth(user, additionalData);
   } catch (error) {
     yield put(signInFailure(error.message));
   }
@@ -104,6 +122,10 @@ export function* watchRegistrationStart() {
   yield takeLatest(REGISTRATION_START, createNewUser);
 }
 
+export function* watchRegistrationSuccess() {
+  yield takeLatest(REGISTRATION_SUCCESS, signInNewUser);
+}
+
 export default function* userSagas() {
   yield all([
     call(watchGoogleSignInStart),
@@ -111,5 +133,6 @@ export default function* userSagas() {
     call(watchCheckUserSession),
     call(watchSignOutStart),
     call(watchRegistrationStart),
+    call(watchRegistrationSuccess),
   ]);
 }

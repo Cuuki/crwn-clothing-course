@@ -8,6 +8,8 @@ import {
   SIGN_OUT_SUCCESS,
   SIGN_OUT_FAILURE,
   REGISTRATION_START,
+  REGISTRATION_SUCCESS,
+  REGISTRATION_FAILURE,
 } from '../constants/userActionTypes';
 
 export const googleSignInStart = () => ({
@@ -17,11 +19,6 @@ export const googleSignInStart = () => ({
 export const credentialSignInStart = (credentials) => ({
   type: CREDENTIAL_SIGN_IN_START,
   payload: credentials,
-});
-
-export const registrationStart = (userData) => ({
-  type: REGISTRATION_START,
-  payload: userData,
 });
 
 export const signInSuccess = (user) => ({
@@ -48,5 +45,20 @@ export const signOutSuccess = () => ({
 
 export const signOutFailure = (errorMessage) => ({
   type: SIGN_OUT_FAILURE,
+  payload: errorMessage,
+});
+
+export const registrationStart = (data) => ({
+  type: REGISTRATION_START,
+  payload: data,
+});
+
+export const registrationSuccess = ({user, additionalData}) => ({
+  type: REGISTRATION_SUCCESS,
+  payload: {user, additionalData},
+});
+
+export const registrationFailure = (errorMessage) => ({
+  type: REGISTRATION_FAILURE,
   payload: errorMessage,
 });
