@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {auth, createUserProfileDocument} from '../../utils/firebase';
+import {connect} from 'react-redux';
+import {registrationStart} from '../../actions/userActions';
 
 import Button from '../UI/Button';
 import FormInput from '../UI/FormInput';
@@ -19,10 +20,11 @@ class Register extends React.Component {
     };
   }
 
-  handleSubmit = async event => {
-    event.preventDefault();
-
+  handleSubmit = async (event) => {
+    const {registrationStart} = this.props;
     const {displayName, email, password, confirmPassword} = this.state;
+
+    event.preventDefault();
 
     if (password !== confirmPassword) {
       alert("Passwords don't match.");
@@ -34,23 +36,10 @@ class Register extends React.Component {
       return;
     }
 
-    try {
-      const {user} = await auth.createUserWithEmailAndPassword(email, password);
-
-      await createUserProfileDocument(user, {displayName});
-
-      this.setState({
-        displayName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    registrationStart(email, password, displayName);
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const {value, name} = event.target;
 
     this.setState({
@@ -111,4 +100,9 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+const mapDispatchToProps = (dispatch) => ({
+  registrationStart: (email, password, displayName) =>
+    dispatch(registrationStart({email, password, displayName})),
+});
+
+export default connect(null, mapDispatchToProps)(Register);

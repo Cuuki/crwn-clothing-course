@@ -7,6 +7,7 @@ import {
   SIGN_OUT_START,
   SIGN_OUT_SUCCESS,
   SIGN_OUT_FAILURE,
+  REGISTRATION_START,
 } from '../constants/userActionTypes';
 
 export const googleSignInStart = () => ({
@@ -16,6 +17,11 @@ export const googleSignInStart = () => ({
 export const credentialSignInStart = (credentials) => ({
   type: CREDENTIAL_SIGN_IN_START,
   payload: credentials,
+});
+
+export const registrationStart = (userData) => ({
+  type: REGISTRATION_START,
+  payload: userData,
 });
 
 export const signInSuccess = (user) => ({
