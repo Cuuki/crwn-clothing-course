@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {connect} from 'react-redux';
 import {registrationStart} from '../../actions/userActions';
@@ -8,22 +8,16 @@ import FormInput from '../UI/FormInput';
 
 import './Register.scss';
 
-class Register extends React.Component {
-  constructor(props) {
-    super(props);
+const Register = ({registrationStart}) => {
+  const [userCredentials, setUserCredentials] = useState({
+    displayName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const {displayName, email, password, confirmPassword} = userCredentials;
 
-    this.state = {
-      displayName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    };
-  }
-
-  handleSubmit = async (event) => {
-    const {registrationStart} = this.props;
-    const {displayName, email, password, confirmPassword} = this.state;
-
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
@@ -39,66 +33,63 @@ class Register extends React.Component {
     registrationStart(email, password, displayName);
   };
 
-  handleChange = (event) => {
+  const handleChange = (event) => {
     const {value, name} = event.target;
 
-    this.setState({
+    setUserCredentials({
+      ...userCredentials,
       [name]: value,
     });
   };
 
-  render() {
-    const {displayName, email, password, confirmPassword} = this.state;
-
-    return (
-      <div className="register">
-        <h2 className="title">I don't have an account</h2>
-        <span>Sign up with your email and password</span>
-        <form action="" onSubmit={this.handleSubmit}>
-          <FormInput
-            id="registerDisplayName"
-            type="text"
-            name="displayName"
-            value={displayName}
-            label="Display name"
-            required="required"
-            onChange={this.handleChange}
-          />
-          <FormInput
-            id="registerEmail"
-            type="email"
-            name="email"
-            value={email}
-            label="Email"
-            required="required"
-            onChange={this.handleChange}
-          />
-          <FormInput
-            id="registerPassword"
-            type="password"
-            name="password"
-            value={password}
-            label="Password"
-            required="required"
-            onChange={this.handleChange}
-          />
-          <FormInput
-            id="registerPasswordConfirm"
-            type="password"
-            name="confirmPassword"
-            value={confirmPassword}
-            label="Confirm Password"
-            required="required"
-            onChange={this.handleChange}
-          />
-          <div className="buttons">
-            <Button type="submit">Register</Button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="register">
+      <h2 className="title">I don't have an account</h2>
+      <span>Sign up with your email and password</span>
+      <form action="" onSubmit={handleSubmit}>
+        <FormInput
+          id="registerDisplayName"
+          type="text"
+          name="displayName"
+          value={displayName}
+          label="Display name"
+          required="required"
+          onChange={handleChange}
+        />
+        <FormInput
+          id="registerEmail"
+          type="email"
+          name="email"
+          value={email}
+          label="Email"
+          required="required"
+          onChange={handleChange}
+        />
+        <FormInput
+          id="registerPassword"
+          type="password"
+          name="password"
+          value={password}
+          label="Password"
+          required="required"
+          onChange={handleChange}
+        />
+        <FormInput
+          id="registerPasswordConfirm"
+          type="password"
+          name="confirmPassword"
+          value={confirmPassword}
+          label="Confirm Password"
+          required="required"
+          onChange={handleChange}
+        />
+        <div className="buttons">
+          <Button type="submit">Register</Button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 const mapDispatchToProps = (dispatch) => ({
   registrationStart: (email, password, displayName) =>
