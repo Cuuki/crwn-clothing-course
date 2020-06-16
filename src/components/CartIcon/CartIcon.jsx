@@ -16,6 +16,7 @@ const CartIcon = ({toggleCartHidden, itemCount}) => (
   </div>
 );
 
+//TODO: remove this from global state and keep local
 const mapDispatchToProps = dispatch => ({
   toggleCartHidden: () => dispatch(toggleCartHidden()),
 });

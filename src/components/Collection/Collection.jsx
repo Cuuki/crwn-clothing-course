@@ -16,15 +16,13 @@ const Collection = ({title, routeName, items, perPage = Infinity, match}) => (
           <CollectionItem key={item.id} item={item} />
         ))}
 
-      {perPage !== Infinity ? (
+      {perPage !== Infinity && (
         <Button
           className="load-more"
           as={Link}
           to={`${match.path}/${routeName}`}>
           More
         </Button>
-      ) : (
-        ''
       )}
     </div>
   </div>
