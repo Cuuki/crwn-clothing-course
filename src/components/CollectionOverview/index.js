@@ -6,7 +6,7 @@ import {
   selectShopCollectionsForPreview,
 } from '../../selectors/shopSelectors';
 
-import withSpinner from '../UI/withSpinner';
+import withSpinner from '../withSpinner';
 import CollectionOverview from './CollectionOverview';
 
 const mapStateToProps = createStructuredSelector({
