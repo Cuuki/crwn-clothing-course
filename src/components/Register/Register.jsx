@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 
 import {connect} from 'react-redux';
 import {registrationStart} from '../../actions/userActions';
@@ -17,30 +17,36 @@ const Register = ({registrationStart}) => {
   });
   const {displayName, email, password, confirmPassword} = userCredentials;
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("Passwords don't match.");
-      return;
-    }
+      if (password !== confirmPassword) {
+        alert("Passwords don't match.");
+        return;
+      }
 
-    if (password.length < 6) {
-      alert('Password length should be at least 6 characters.');
-      return;
-    }
+      if (password.length < 6) {
+        alert('Password length should be at least 6 characters.');
+        return;
+      }
 
-    registrationStart(email, password, displayName);
-  };
+      registrationStart(email, password, displayName);
+    },
+    [registrationStart, confirmPassword, displayName, email, password]
+  );
 
-  const handleChange = (event) => {
-    const {value, name} = event.target;
+  const handleChange = useCallback(
+    (event) => {
+      const {value, name} = event.target;
 
-    setUserCredentials({
-      ...userCredentials,
-      [name]: value,
-    });
-  };
+      setUserCredentials({
+        ...userCredentials,
+        [name]: value,
+      });
+    },
+    [userCredentials]
+  );
 
   return (
     <div className="register">

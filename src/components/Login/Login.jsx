@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 
 import {connect} from 'react-redux';
 import {
@@ -18,20 +18,20 @@ const Login = ({googleSignInStart, credentialSignInStart}) => {
   });
   const {email, password} = userCredentials;
 
-  const handleSubmit = (event) => {
+  const handleSubmit = useCallback((event) => {
     event.preventDefault();
 
     credentialSignInStart(email, password);
-  };
+  }, [credentialSignInStart, email, password]);
 
-  const handleChange = (event) => {
+  const handleChange = useCallback((event) => {
     const {value, name} = event.target;
 
     setUserCredentials({
       ...userCredentials,
       [name]: value,
     });
-  };
+  }, [userCredentials]);
 
   return (
     <div className="login">

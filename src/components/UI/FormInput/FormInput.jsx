@@ -4,15 +4,15 @@ import classNames from 'classnames';
 
 import './FormInput.scss';
 
-const FormInput = ({handleChange, label, ...otherProps}) => (
+const FormInput = ({handleChange, label, id, value, ...otherProps}) => (
   <div className="group">
     <input className="form-input" onChange={handleChange} {...otherProps} />
     {label ? (
       <label
-        htmlFor={otherProps.id}
+        htmlFor={id}
         className={classNames(
           'form-input-label',
-          otherProps.value.length ? 'shrink' : ''
+          value.length ? 'shrink' : ''
         )}>
         {label}
       </label>
