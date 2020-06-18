@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`expect to render Button component 1`] = `
+<styled.button
+  className="custom-button"
+  inverted={true}
+  isGoogleSignIn={true}
+  onClick={[Function]}
+>
+  Test
+</styled.button>
+`;
