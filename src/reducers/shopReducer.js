@@ -4,7 +4,7 @@ import {
   FETCH_COLLECTIONS_FAILURE,
 } from '../constants/shopActionTypes';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   collections: null,
   isFetching: false,
   errorMessage: '',

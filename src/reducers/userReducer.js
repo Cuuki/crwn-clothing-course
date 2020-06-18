@@ -5,7 +5,7 @@ import {
   SIGN_OUT_FAILURE,
 } from '../constants/userActionTypes';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   currentUser: null,
   errorMessage: null,
 };
