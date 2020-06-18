@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Directory component 1`] = `
+<div
+  className="directory"
+>
+  <withRouter(DirectoryItem)
+    imageUrl="https://i.ibb.co/cvpntL1/hats.png"
+    key="1"
+    linkUrl="shop/test"
+    title="test"
+  />
+  <withRouter(DirectoryItem)
+    imageUrl="https://i.ibb.co/cvpntL1/hats.png"
+    key="2"
+    linkUrl="shop/test2"
+    title="test 2"
+  />
+</div>
+`;

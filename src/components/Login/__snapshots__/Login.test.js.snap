@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Login component 1`] = `
+<div
+  className="login"
+>
+  <h2
+    className="title"
+  >
+    I already have an account
+  </h2>
+  <span>
+    Sign in with your email and password
+  </span>
+  <form
+    action=""
+    onSubmit={[Function]}
+  >
+    <FormInput
+      id="loginEmail"
+      label="Email"
+      name="email"
+      onChange={[Function]}
+      required="required"
+      type="email"
+      value=""
+    />
+    <FormInput
+      id="loginPassword"
+      label="Password"
+      name="password"
+      onChange={[Function]}
+      required="required"
+      type="password"
+      value=""
+    />
+    <div
+      className="buttons"
+    >
+      <Button
+        type="submit"
+      >
+        Login
+      </Button>
+      <Button
+        isGoogleSignIn={true}
+        onClick={[MockFunction]}
+        type="button"
+      >
+        Login with Google
+      </Button>
+    </div>
+  </form>
+</div>
+`;
