@@ -1,17 +1,17 @@
-import {shallow} from 'enzyme';
 import React from 'react';
+import {render} from "@testing-library/react";
 import Login from './Login';
 
-it('renders Login component', () => {
-  const mockGoogleSignInStart = jest.fn();
-  const mockCredentialSignInStart = jest.fn();
+describe('Login', () => {
+  it('renders Login component', () => {
+    const mockGoogleSignInStart = jest.fn();
+    const mockCredentialSignInStart = jest.fn();
 
-  const wrapper = shallow(
-    <Login
-      googleSignInStart={mockGoogleSignInStart}
-      credentialSignInStart={mockCredentialSignInStart}
-    />
-  );
-
-  expect(wrapper).toMatchSnapshot();
-});
+    expect(render(
+      <Login
+        googleSignInStart={mockGoogleSignInStart}
+        credentialSignInStart={mockCredentialSignInStart}
+      />
+    )).toMatchSnapshot();
+  });
+})

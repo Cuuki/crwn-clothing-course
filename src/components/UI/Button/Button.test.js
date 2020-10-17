@@ -1,11 +1,12 @@
-import {shallow} from 'enzyme';
 import React from 'react';
+import {render} from "@testing-library/react";
 import Button from './Button';
 
 it('renders Button component', () => {
   expect(
-    shallow(
-      <Button onClick={() => {}} inverted isGoogleSignIn>
+    render(
+      <Button onClick={() => {
+      }} inverted isGoogleSignIn>
         Test
       </Button>
     )
