@@ -1,11 +1,5 @@
 import React, {useState, useCallback} from 'react';
 
-import {connect} from 'react-redux';
-import {
-  googleSignInStart,
-  credentialSignInStart,
-} from '../../actions/userActions';
-
 import Button from '../UI/Button';
 import FormInput from '../UI/FormInput';
 
@@ -18,20 +12,26 @@ const Login = ({googleSignInStart, credentialSignInStart}) => {
   });
   const {email, password} = userCredentials;
 
-  const handleSubmit = useCallback((event) => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
 
-    credentialSignInStart(email, password);
-  }, [credentialSignInStart, email, password]);
+      credentialSignInStart(email, password);
+    },
+    [credentialSignInStart, email, password]
+  );
 
-  const handleChange = useCallback((event) => {
-    const {value, name} = event.target;
+  const handleChange = useCallback(
+    (event) => {
+      const {value, name} = event.target;
 
-    setUserCredentials({
-      ...userCredentials,
-      [name]: value,
-    });
-  }, [userCredentials]);
+      setUserCredentials({
+        ...userCredentials,
+        [name]: value,
+      });
+    },
+    [userCredentials]
+  );
 
   return (
     <div className="login">
@@ -67,10 +67,4 @@ const Login = ({googleSignInStart, credentialSignInStart}) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  googleSignInStart: () => dispatch(googleSignInStart()),
-  credentialSignInStart: (email, password) =>
-    dispatch(credentialSignInStart({email, password})),
-});
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;

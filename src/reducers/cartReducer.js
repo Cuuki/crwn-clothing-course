@@ -10,7 +10,7 @@ import {
   CLEAR_CART,
 } from '../constants/cartActionTypes';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   cartHidden: true,
   cartItems: [],
 };
