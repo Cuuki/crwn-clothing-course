@@ -10,7 +10,7 @@ import Spinner from './components/UI/Spinner';
 import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
 
-import 'normalize.css';
+import 'sanitize.css';
 import './App.scss';
 
 const HomePage = lazy(() => import('./pages/HomePage'));

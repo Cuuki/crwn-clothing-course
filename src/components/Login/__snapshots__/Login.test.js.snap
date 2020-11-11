@@ -55,13 +55,13 @@ Object {
             class="buttons"
           >
             <button
-              class="sc-bdnylx XiWmD custom-button"
+              class="sc-bdfBwQ fHSlrP custom-button"
               type="submit"
             >
               Login
             </button>
             <button
-              class="sc-bdnylx kLurem custom-button"
+              class="sc-bdfBwQ jtihTy custom-button"
               type="button"
             >
               Login with Google
@@ -122,13 +122,13 @@ Object {
           class="buttons"
         >
           <button
-            class="sc-bdnylx XiWmD custom-button"
+            class="sc-bdfBwQ fHSlrP custom-button"
             type="submit"
           >
             Login
           </button>
           <button
-            class="sc-bdnylx kLurem custom-button"
+            class="sc-bdfBwQ jtihTy custom-button"
             type="button"
           >
             Login with Google
