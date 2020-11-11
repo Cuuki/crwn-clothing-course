@@ -1,7 +1,6 @@
-import {TOGGLE_CART_HIDDEN} from '../../constants/cartActionTypes';
-import cartReducer, {INITIAL_STATE} from '../cartReducer';
+import cartReducer, {INITIAL_STATE, TOGGLE_CART_HIDDEN} from '../cart';
 
-describe('cartReducer', () => {
+describe('cart reducer', () => {
   it('should return the initial state', () => {
     expect(cartReducer(undefined, {})).toEqual(INITIAL_STATE);
   });

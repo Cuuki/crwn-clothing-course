@@ -1,6 +1,6 @@
-import userReducer, {INITIAL_STATE} from '../userReducer';
+import userReducer, {INITIAL_STATE} from '../user';
 
-describe('userReducer', () => {
+describe('user reducer', () => {
   it('should return the initial state', () => {
     expect(userReducer(undefined, {})).toEqual(INITIAL_STATE);
   });
