@@ -1,16 +1,11 @@
-import React, {useEffect, lazy, Suspense} from 'react';
-
+import React, {lazy, Suspense, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
-import {selectCurrentUser} from './selectors/userSelectors';
-import {checkUserSession} from './actions/userActions';
-
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
+import {checkUserSession, selectCurrentUser} from './redux/modules/user';
 import Spinner from './components/UI/Spinner';
 import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
-
-import 'sanitize.css';
 import './App.scss';
 
 const HomePage = lazy(() => import('./pages/HomePage'));

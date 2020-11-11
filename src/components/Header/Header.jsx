@@ -1,20 +1,16 @@
 import React from 'react';
-
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
-import {selectCurrentUser} from '../../selectors/userSelectors';
-import {selectCartHidden} from '../../selectors/cartSelectors';
-import {signOutStart} from '../../actions/userActions';
-
+import {selectCurrentUser, signOutStart} from '../../redux/modules/user';
+import {selectCartHidden} from '../../redux/modules/cart';
 import CartIcon from '../CartIcon';
 import CartDropdown from '../CartDropdown';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
-
 import {
   HeaderStyled,
   LogoLinkStyled,
-  OptionsStyled,
   OptionLinkStyled,
+  OptionsStyled,
 } from './Header.styles';
 
 const Header = ({currentUser, cartHidden, signOutStart}) => (

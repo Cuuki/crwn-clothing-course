@@ -1,11 +1,9 @@
-import React, {useEffect, lazy, Suspense} from 'react';
+import React, {lazy, Suspense, useEffect} from 'react';
 
 import {connect} from 'react-redux';
-import {fetchCollectionsStart} from '../../actions/shopActions';
-
 import {Route} from 'react-router-dom';
+import {fetchCollectionsStart} from '../../redux/modules/shop';
 import Spinner from '../../components/UI/Spinner';
-
 import './ShopPage.scss';
 
 const CollectionOverview = lazy(() =>

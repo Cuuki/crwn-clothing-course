@@ -1,10 +1,7 @@
 import React from 'react';
-
 import {connect} from 'react-redux';
-import {addCartItem} from '../../actions/cartActions';
-
+import {addCartItem} from '../../redux/modules/cart';
 import Button from '../UI/Button';
-
 import './CollectionItem.scss';
 
 const CollectionItem = ({item, addCartItem}) => {
@@ -12,6 +9,7 @@ const CollectionItem = ({item, addCartItem}) => {
 
   return (
     <div className="collection-item">
+      {/* TODO: this sucks, make it better */}
       <div
         className="image"
         style={{backgroundImage: `url(${imageUrl})`}}></div>
@@ -28,8 +26,8 @@ const CollectionItem = ({item, addCartItem}) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  addCartItem: cartItem => dispatch(addCartItem(cartItem)),
+const mapDispatchToProps = (dispatch) => ({
+  addCartItem: (cartItem) => dispatch(addCartItem(cartItem)),
 });
 
 export default connect(null, mapDispatchToProps)(CollectionItem);

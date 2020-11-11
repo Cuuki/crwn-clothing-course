@@ -1,11 +1,8 @@
-import React, {useState, useCallback} from 'react';
-
+import React, {useCallback, useState} from 'react';
 import {connect} from 'react-redux';
-import {registrationStart} from '../../actions/userActions';
-
+import {registrationStart} from '../../redux/modules/user';
 import Button from '../UI/Button';
 import FormInput from '../UI/FormInput';
-
 import './Register.scss';
 
 const Register = ({registrationStart}) => {

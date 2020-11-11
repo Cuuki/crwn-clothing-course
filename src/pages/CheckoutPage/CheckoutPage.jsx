@@ -1,12 +1,9 @@
 import React from 'react';
-
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
-import {selectCartItems, selectCartTotal} from '../../selectors/cartSelectors';
-
+import {selectCartItems, selectCartTotal} from '../../redux/modules/cart';
 import CheckoutItem from '../../components/CheckoutItem';
 import StripeCheckoutButton from '../../components/StripeCheckoutButton';
-
 import './CheckoutPage.scss';
 
 const CheckoutPage = ({cartItems, cartTotal}) => (
@@ -28,7 +25,7 @@ const CheckoutPage = ({cartItems, cartTotal}) => (
         <span>Remove</span>
       </div>
     </div>
-    {cartItems.map(cartItem => (
+    {cartItems.map((cartItem) => (
       <CheckoutItem key={cartItem.id} item={cartItem} />
     ))}
 

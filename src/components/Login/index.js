@@ -1,10 +1,8 @@
-
 import {connect} from 'react-redux';
 import {
-  googleSignInStart,
   credentialSignInStart,
-} from '../../actions/userActions';
-
+  googleSignInStart,
+} from '../../redux/modules/user';
 import Login from './Login';
 
 const mapDispatchToProps = (dispatch) => ({

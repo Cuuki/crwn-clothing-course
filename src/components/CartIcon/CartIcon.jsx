@@ -1,12 +1,8 @@
 import React from 'react';
-
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
-import {selectCartItemsCount} from '../../selectors/cartSelectors';
-import {toggleCartHidden} from '../../actions/cartActions';
-
+import {selectCartItemsCount, toggleCartHidden} from '../../redux/modules/cart';
 import {ReactComponent as ShoppingIcon} from '../../assets/shopping-bag.svg';
-
 import './CartIcon.scss';
 
 const CartIcon = ({toggleCartHidden, itemCount}) => (
@@ -16,13 +12,12 @@ const CartIcon = ({toggleCartHidden, itemCount}) => (
   </div>
 );
 
-//TODO: remove this from global state and keep local
-const mapDispatchToProps = dispatch => ({
-  toggleCartHidden: () => dispatch(toggleCartHidden()),
-});
-
 const mapStateToProps = createStructuredSelector({
   itemCount: selectCartItemsCount,
+});
+//TODO: remove this from global state and keep local?
+const mapDispatchToProps = (dispatch) => ({
+  toggleCartHidden: () => dispatch(toggleCartHidden()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
